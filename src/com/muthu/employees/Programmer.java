@@ -8,17 +8,21 @@ public class Programmer extends Employee{
     int yoe;
     int iq;
 
-    private static final String employeeDetailRegex = "locpd\\s*=\\s*(?<locpd>\\d+),\\s*yoe\\s*=\\s*(?<yoe>\\d+),\\s*iq\\s*=\\s*(?<iq>\\d+)";
-    private static final Pattern employeeDetailPat = Pattern.compile(employeeDetailRegex);
+    private static final String programmerDetailRegex = "locpd\\s*=\\s*(?<locpd>\\d+),\\s*yoe\\s*=\\s*(?<yoe>\\d+),\\s*iq\\s*=\\s*(?<iq>\\d+)";
+    private static final Pattern programmerDetailPat = Pattern.compile(programmerDetailRegex);
 
     public Programmer(String employeeString){
         super();
-        Matcher employeeDetailsMat = employeeDetailPat.matcher(employeeString);
+        Matcher employeeDetailsMat = programmerDetailPat.matcher(employeeString);
         if(employeeDetailsMat.matches()){
             this.locpd = Integer.parseInt(employeeDetailsMat.group("locpd"));
             this.yoe = Integer.parseInt(employeeDetailsMat.group("yoe"));
             this.iq = Integer.parseInt(employeeDetailsMat.group("iq"));
         }
+    }
+
+    public int getSalary(){
+        return locpd * 100 + yoe * 10 + iq * 200;
     }
 
     @Override
